@@ -39,6 +39,7 @@ public class AuthenticationService {
     if (userEmailOptional.isPresent()) {
       throw new RuntimeException("User exits");
     }
+    
     var user = User.builder()
         .firstName(request.getFirstName())
         .lastName(request.getLastName())
@@ -48,8 +49,10 @@ public class AuthenticationService {
         .build();
     repository.save(user);
     var jwtToken = jwtService.generateToken(user);
-    return AuthenticationResponse.builder()
-        .token(jwtToken).build();
+    return AuthenticationResponse
+        .builder()
+        .token(jwtToken)
+        .build();
   }
   
   public AuthenticationResponse login(LoginRequest request) {
@@ -65,14 +68,13 @@ public class AuthenticationService {
     return AuthenticationResponse.builder()
         .token(jwtToken).build();
   }
-  
   public AuthenticationResponse loginGoogle(HttpServletRequest request) throws GeneralSecurityException, IOException {
     NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
     // Khởi tạo jsonFactory
     JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
     
     GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-        .setAudience(Arrays.asList("991219302120-7k5uhgp5n6qfvj65064s0hmgdnffqaun.apps.googleusercontent.com"))
+        .setAudience(Arrays.asList("173570859950-ld6n4nukbdhhgv8mfrof0bfr59fe0670.apps.googleusercontent.com"))
         .build();
     String authorization = request.getHeader("Authorization");
     
