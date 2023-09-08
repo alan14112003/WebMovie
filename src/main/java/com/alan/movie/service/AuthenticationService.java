@@ -4,6 +4,7 @@ import com.alan.movie.Model.Role;
 import com.alan.movie.Model.User;
 import com.alan.movie.config.JwtService;
 import com.alan.movie.dto.AuthenticationResponse;
+import com.alan.movie.dto.LoginGoogleRequest;
 import com.alan.movie.dto.LoginRequest;
 import com.alan.movie.dto.RegisterRequest;
 import com.alan.movie.repository.UserRepository;
@@ -14,7 +15,6 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -68,21 +68,19 @@ public class AuthenticationService {
     return AuthenticationResponse.builder()
         .token(jwtToken).build();
   }
-  public AuthenticationResponse loginGoogle(HttpServletRequest request) throws GeneralSecurityException, IOException {
+  public AuthenticationResponse loginGoogle(LoginGoogleRequest loginGoogleRequest) throws GeneralSecurityException,
+      IOException {
     NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
     // Khởi tạo jsonFactory
     JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
     
+    String token = loginGoogleRequest.getToken();
+    
+    System.out.println("token: "+ token);
+    
     GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
         .setAudience(Arrays.asList("173570859950-ld6n4nukbdhhgv8mfrof0bfr59fe0670.apps.googleusercontent.com"))
         .build();
-    String authorization = request.getHeader("Authorization");
-    
-    if (authorization == null || !authorization.startsWith("Bearer ")) {
-      throw new RuntimeException("Not Authorization in header");
-    }
-    
-    String token = authorization.substring(7);
     
     GoogleIdToken idToken = verifier.verify(token);
     if (idToken == null) {

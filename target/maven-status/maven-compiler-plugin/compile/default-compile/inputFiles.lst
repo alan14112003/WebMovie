@@ -20,6 +20,7 @@ D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\Model\Role.
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\repository\ActorRepository.java
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\service\ActorService.java
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\service\AuthenticationService.java
+D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\dto\LoginGoogleRequest.java
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\dto\ActorResponse.java
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\dto\ActorRequest.java
 D:\WORKSPACE\Alan\JAVA_PROJECT\WebMovie\src\main\java\com\alan\movie\config\JwtAuthenticationFilter.java

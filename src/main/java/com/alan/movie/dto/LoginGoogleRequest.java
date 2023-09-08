@@ -1,2 +1,15 @@
-package com.alan.movie.dto;public class LoginGoogleRequest {
+package com.alan.movie.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoginGoogleRequest {
+  private String token;
+  
 }
